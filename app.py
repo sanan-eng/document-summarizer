@@ -78,7 +78,4 @@ def summarize():
         return jsonify({"error": "Internal summarization error"}), 500
 
 
-if __name__ == "__main__":
-    from waitress import serve
-    print("AI Summarizer running on http://localhost:8080")
-    serve(app, host="0.0.0.0", port=8080)
+
