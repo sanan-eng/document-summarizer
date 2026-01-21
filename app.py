@@ -8,9 +8,7 @@ from AI import extract_text, short_summary, medium_summary, long_summary
 
 app = Flask(__name__)
 
-@app.route("/")
-def home():
-    return "OK"
+
 
 app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024
 app.config["UPLOAD_FOLDER"] = tempfile.gettempdir()
