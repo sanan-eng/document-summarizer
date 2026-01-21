@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Document Summarizer</title>
+
+    <!-- Google Font (Tech Style) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1><i class="fas fa-brain"></i> AI Document Summarizer</h1>
+        <p class="subtitle">Smart summaries powered by AI</p>
+    </header>
+
+    <div class="card">
+
+        <!-- Upload -->
+        <div class="input-section">
+            <div class="section-header">
+                <h3><i class="fas fa-upload"></i> Upload Document</h3>
+                <span class="file-types">PDF • DOCX • PPTX • TXT</span>
+            </div>
+
+            <div class="file-upload-area" id="dropArea">
+                <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                <p>Drag & drop or click to upload</p>
+                <input type="file" id="fileInput" hidden>
+                <button class="btn-secondary" onclick="document.getElementById('fileInput').click()">
+                    Choose File
+                </button>
+                <div id="fileName" class="file-name"></div>
+            </div>
+        </div>
+
+        <div class="divider"><span>OR</span></div>
+
+        <!-- Text -->
+        <div class="input-section">
+            <div class="section-header">
+                <h3><i class="fas fa-keyboard"></i> Paste Text</h3>
+                <span class="char-count" id="charCount">0 chars</span>
+            </div>
+
+            <textarea id="textInput" rows="5"
+                placeholder="Paste your text here (minimum 50 characters)..."></textarea>
+        </div>
+
+        <!-- Options -->
+        <div class="options-section">
+            <div class="option-group">
+                <label><i class="fas fa-sliders-h"></i> Summary Type</label>
+                <select id="summaryType">
+                    <option value="short">Short (Bullets)</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="long">Long (Detailed)</option>
+                </select>
+            </div>
+
+            <button class="btn-primary" id="summarizeBtn" onclick="generateSummary()">
+                <i class="fas fa-wand-magic-sparkles"></i> Generate
+            </button>
+        </div>
+
+    </div>
+
+    <!-- Result -->
+    <div class="card result-card" id="resultCard">
+        <div class="result-header">
+            <h3><i class="fas fa-file-lines"></i> AI Summary</h3>
+            <div class="result-meta">
+                <span id="summaryTypeLabel"></span>
+                <span>•</span>
+                <span id="summaryLength"></span>
+                <button class="btn-icon" onclick="copySummary()">
+                    <i class="fas fa-copy"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="summaryOutput" class="summary-output"></div>
+
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>AI is thinking...</p>
+        </div>
+    </div>
+
+    <!-- Error -->
+    <div class="error-card" id="errorCard">
+        <p id="errorMessage"></p>
+    </div>
+
+    <footer>
+        <p>Powered by Groq & LLaMA 3.1</p>
+    </footer>
+
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
